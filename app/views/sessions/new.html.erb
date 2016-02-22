@@ -1,0 +1,5 @@
+<%= form_for(:session, url: login_path) do |f| %>
+	<%= f.text_field :rf, class: 'caixa', maxlength: 7, placeholder: ' RF', autofocus: true %>
+	<%= f.password_field :password, placeholder: ' Senha', class: 'caixa' %>
+	<%= f.submit "Acessar" %>
+<% end %>

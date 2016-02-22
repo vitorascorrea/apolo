@@ -1,0 +1,9 @@
+Nº da NCF: <%= @chamado.id %><br>
+Data do Velório: <%= @chamado.ncf.data_velorio %><br>
+Data do Sepultamento: <%= @chamado.ncf.data_sepultamento %><br><br>
+Status: <%= @chamado.status %><br>
+Tempo estimado: <span id="countdown" class="timer">Calculando...</span>
+<br>
+<br>
+Motorista alocado: <%= @motorista.nome unless @motorista.nil? %><br>
+Número do Comunicador: <%= @motorista.n_comunicador unless @motorista.nil? %>

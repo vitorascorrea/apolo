@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219162258) do
+ActiveRecord::Schema.define(version: 20160222185911) do
 
   create_table "chamados", force: :cascade do |t|
     t.string   "status"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160219162258) do
   end
 
   create_table "ncf", force: :cascade do |t|
-    t.datetime "data_funeral"
+    t.datetime "data_velorio"
     t.datetime "data_sepultamento"
     t.text     "lista_itens"
     t.string   "atendente_responsavel"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20160219162258) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "rf"
   end
 
 end
