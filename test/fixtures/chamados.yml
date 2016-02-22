@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  tempo_prox_status: 2016-02-18 17:24:14
+
+two:
+  status: MyString
+  tempo_prox_status: 2016-02-18 17:24:14

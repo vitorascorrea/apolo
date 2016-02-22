@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_funeral: 2016-02-18 17:23:18
+  data_sepultamento: 2016-02-18 17:23:18
+  lista_itens: MyText
+  atendente_responsavel: MyString
+  nome_contratante: MyString
+  nome_falecido: MyString
+  contato_contratante: MyString
+
+two:
+  data_funeral: 2016-02-18 17:23:18
+  data_sepultamento: 2016-02-18 17:23:18
+  lista_itens: MyText
+  atendente_responsavel: MyString
+  nome_contratante: MyString
+  nome_falecido: MyString
+  contato_contratante: MyString
