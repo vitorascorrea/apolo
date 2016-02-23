@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222185911) do
+ActiveRecord::Schema.define(version: 20160223181038) do
 
   create_table "chamados", force: :cascade do |t|
     t.string   "status"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160222185911) do
     t.integer  "ncf_id"
     t.integer  "motorista_velorio_id"
     t.integer  "motorista_sepultamento_id"
+    t.integer  "nota"
   end
 
   add_index "chamados", ["motorista_sepultamento_id"], name: "index_chamados_on_motorista_sepultamento_id"

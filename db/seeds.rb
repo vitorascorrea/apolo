@@ -8,6 +8,6 @@
 
 moto1 = Motorista.create(nome: 'Vitor', data_nasc: '01-01-1993', n_comunicador: '991154786', foto: nil)
 moto2 = Motorista.create(nome: 'Pedro', data_nasc: '01-01-1992', n_comunicador: '999954786', foto: nil)
-ncf1 = Ncf.create(data_velorio: '22-02-2016', data_sepultamento: '23-02-2016', lista_itens: 'Urna 1, Vela 2', atendente_responsavel: 'Frederico', nome_contratante: 'Pedro', nome_falecido: 'Miguel', contato_contratante: '998856478')
-chamado1 = Chamado.create(status: 'Aguardando Alocação de Motorista', tempo_prox_status: '23-02-2016 00:30:00', ncf_id: 1)
+ncf1 = Ncf.create(data_velorio: '24-02-2016', data_sepultamento: '25-02-2016', lista_itens: 'Urna 1, Vela 2', atendente_responsavel: 'Frederico', nome_contratante: 'Pedro', nome_falecido: 'Miguel', contato_contratante: '998856478')
+chamado1 = Chamado.create(status: 'Aguardando Alocação de Motorista', tempo_prox_status: '24-02-2016 00:30:00', ncf_id: 1)
 user1 = User.create(rf: '0000000', password: '123456')

@@ -1,0 +1,23 @@
+Associe um motorista para o velório da NCF <%= @chamado.ncf.id %> <br>
+Data e horário do velório: <%= @chamado.ncf.data_velorio.strftime("%d-%m-%Y %H:%M") %> <br>
+Data e horário do sepultamento: <%= @chamado.ncf.data_sepultamento.strftime("%d-%m-%Y %H:%M") %> 
+<br><br><br>
+
+<table border='1'>
+	<tr>
+		<th>RF do Motorista</th>
+		<th>Nome</th>
+		<th>Nº do Comunicador</th>
+		<th>Alocar Motorista?</th>
+	</tr>
+	<% @motoristas.each do |m| %>
+	<tr>
+		<td><%= m.id %></td>
+		<td><%= m.nome %></td>
+		<td><%= m.n_comunicador %></td>
+		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id) %></td>
+	</tr>
+	<% end %>	
+</table>
+
+<%= link_to "Logout", logout_path, method: 'delete' %>
