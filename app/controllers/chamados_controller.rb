@@ -25,7 +25,6 @@ class ChamadosController < ApplicationController
 	#========================================================================#
 
 	def associa_motorista
-		debugger
 		@chamado = Chamado.find(session[:id_chamado])
 		@chamado.update_attributes(motorista_velorio_id: params[:id])
 		redirect_to chamados_path

@@ -2,7 +2,6 @@ $(document).ready(function() {
     initialTime = Math.floor((moment(gon.horario) - moment())/1000);
     seconds = initialTime;
 });
-
 function timer() {
     var days        = Math.floor(seconds/24/60/60);
     var hoursLeft   = Math.floor((seconds) - (days*86400));
