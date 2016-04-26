@@ -1,7 +1,5 @@
 <div id="principal">
 	Nº da NCF: <%= @chamado.id %><br>
-	Data do Velório: <%= @chamado.ncf.data_velorio %><br>
-	Data do Sepultamento: <%= @chamado.ncf.data_sepultamento %><br><br>
 	Status: <%= @chamado.status %><br>
 
 <% if @chamado.status != "Finalizado" %>

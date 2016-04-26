@@ -5,7 +5,7 @@ class ChamadosController < ApplicationController
 	end
 
 	def create
-		@chamado = Chamado.new(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota], ncf: params[:chamado][:ncf])
+		@chamado = Chamado.new(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota].to_i, ncf: params[:chamado][:ncf])
 		if @chamado.save
       redirect_to chamados_path
     else
@@ -46,11 +46,14 @@ class ChamadosController < ApplicationController
 		@chamado = Chamado.find(params[:format])
 		index_novo_status = array_status.index(@chamado.status) + 1			
 
-		if @chamado.status == 'Aguardando Alocação de Motorista' || @chamado.status == 'Alocando motorista de sepultamento'
+		if @chamado.status == 'Aguardando alocação de motorista' || @chamado.status == 'Alocando motorista de sepultamento'
 			session[:id_chamado] = @chamado.id
 			redirect_to lista_alocacao_motoristas_path
 		else
 			if index_novo_status < array_status.length
+				if array_status[index_novo_status] == 'Alocando motorista de sepultamento'
+					@chamado.update_attributes(motorista_velorio_id: nil)
+				end
 				atualizar_status(@chamado.id, array_status[index_novo_status])
 			end	
 			redirect_to chamados_path
