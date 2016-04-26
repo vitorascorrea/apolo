@@ -27,20 +27,24 @@ class ChamadosController < ApplicationController
 	def associa_motorista
 		@chamado = Chamado.find(session[:id_chamado])
 		@chamado.update_attributes(motorista_velorio_id: params[:id])
+		array_status = ['Aguardando Alocação de Motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		index_novo_status = array_status.index(@chamado.status) + 1	
+		atualizar_status(@chamado.id, array_status[index_novo_status])
 		redirect_to chamados_path
 	end
 
-	def controlador_atualizacao
-		@chamado = Chamado.find(params[:id])
-		if params[:status] == 'Alocar motorista de velório'
-			atualizar_status(params[:id], 'À caminho do falecido')
-			session[:id_chamado] = params[:id]
+	def troca_status		
+		array_status = ['Aguardando Alocação de Motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		@chamado = Chamado.find(params[:format])
+		index_novo_status = array_status.index(@chamado.status) + 1			
+
+		if @chamado.status == 'Aguardando Alocação de Motorista' || @chamado.status == 'Alocando motorista de sepultamento'
+			session[:id_chamado] = @chamado.id
 			redirect_to lista_alocacao_motoristas_path
-		elsif params[:status] == 'Finalizado'
-			atualizar_status(@chamado.id, params[:status])
-			redirect_to chamados_path
 		else
-			atualizar_status(@chamado.id, params[:status])
+			if index_novo_status < array_status.length
+				atualizar_status(@chamado.id, array_status[index_novo_status])
+			end	
 			redirect_to chamados_path
 		end
 	end
