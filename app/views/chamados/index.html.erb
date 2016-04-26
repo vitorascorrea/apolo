@@ -1,6 +1,7 @@
 <table border='1'>
 	<tr>
 		<th>Nº da NCF</th>
+		<th>NCF</th>
 		<th>Status Atual</th>
 		<th>Horário para a próxima mudança de Status</th>
 		<th>Motorista responsável pelo velório</th>
@@ -8,7 +9,8 @@
 	</tr>
 	<% @chamados.each do |c| %>
 	<tr>
-		<td><%= c.ncf.id %></td>
+		<td><%= c.nota %></td>
+		<td><%= link_to "PDF", c.ncf.url, target: "_blank" %></td>
 		<td><%= c.status %></td>
 		<td><%= c.tempo_prox_status.strftime('%d-%m-%Y %H:%M') %></td>
 		<td><%= c.motorista_velorio_id ? Motorista.find(c.motorista_velorio_id).nome : "Nenhum motorista alocado" %></td>

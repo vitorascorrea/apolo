@@ -1,8 +1,16 @@
 class ChamadosController < ApplicationController
+	
 	def new
+		@chamado = Chamado.new
 	end
 
 	def create
+		@chamado = Chamado.new(status: "Aguardando Alocação de Motoristas", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota], ncf: params[:chamado][:ncf])
+		if @chamado.save
+      redirect_to chamados_path
+    else
+      render 'new'
+    end
 	end
 
 	def show
