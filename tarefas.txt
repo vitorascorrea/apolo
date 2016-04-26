@@ -1,4 +1,4 @@
-- Formulrio de criar novo chamado (anexar pdf)
-- Adicionar bot„o para prÛximo status (tirar lista)
+- Formul√°rio de criar novo chamado (anexar pdf)
+- Adicionar bot√£o para pr√≥ximo status (tirar lista)
 - Resolver conflitos de motoristas (horarios conflitantes)
-- AdministraÁ„o (criar motorista, criar operador)
+- Administra√ß√£o (criar motorista, criar operador)

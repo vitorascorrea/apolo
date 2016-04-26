@@ -1,8 +1,16 @@
 class ChamadosController < ApplicationController
+
 	def new
+		@chamado = Chamado.new
 	end
 
 	def create
+		@chamado = Chamado.new(status: "Aguardando Alocação de Motoristas", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota], ncf: params[:chamado][:ncf])
+		if @chamado.save
+      redirect_to chamados_path
+    else
+      render 'new'
+    end
 	end
 
 	def show
@@ -16,7 +24,7 @@ class ChamadosController < ApplicationController
 		@chamados = Chamado.all
 	end
 
-	def update				
+	def update
 		@chamado = Chamado.find(params[:id])
 		atualizar_nota(params[:id], params[:chamado][:nota])
 		redirect_to root_url
@@ -49,13 +57,13 @@ class ChamadosController < ApplicationController
 
 	private
 
-	def atualizar_status(id, status)		
+	def atualizar_status(id, status)
 		@chamado = Chamado.find(id)
-		@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)	
+		@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)
 	end
 
 	def atualizar_nota(id, nota)
 		@chamado = Chamado.find(id)
-		@chamado.update_attributes(nota: nota)	
+		@chamado.update_attributes(nota: nota)
 	end
 end
