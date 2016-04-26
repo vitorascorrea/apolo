@@ -1,7 +1,7 @@
 <%= form_for(@chamado, html: {multipart: true}) do |f| %>
 
   Nota <br>
-  <%= f.text_field :nota %>
+  <%= f.number_field :nota %>
   <%= @chamado.errors.full_messages_for(:nota).to_sentence %><br><br>
 
   Data do Velorio: <br>
