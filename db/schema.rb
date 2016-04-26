@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425191035) do
+ActiveRecord::Schema.define(version: 20160426191626) do
 
   create_table "chamados", force: :cascade do |t|
     t.string   "status"
@@ -32,20 +32,9 @@ ActiveRecord::Schema.define(version: 20160425191035) do
     t.datetime "data_nasc"
     t.string   "n_comunicador"
     t.string   "foto"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "ncf", force: :cascade do |t|
-    t.datetime "data_velorio"
-    t.datetime "data_sepultamento"
-    t.text     "lista_itens"
-    t.string   "atendente_responsavel"
-    t.string   "nome_contratante"
-    t.string   "nome_falecido"
-    t.string   "contato_contratante"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "ocupado",       default: false
   end
 
   create_table "users", force: :cascade do |t|

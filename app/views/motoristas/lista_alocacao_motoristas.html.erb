@@ -13,7 +13,7 @@ Associe um motorista para o velório da NCF <%= @chamado.nota %> <br>
 		<td><%= m.id %></td>
 		<td><%= m.nome %></td>
 		<td><%= m.n_comunicador %></td>
-		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id) %></td>
+		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id, :id_chamado => params[:id_chamado]) %></td>
 	</tr>
 	<% end %>	
 </table>

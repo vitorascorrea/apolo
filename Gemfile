@@ -15,6 +15,7 @@ gem 'mailman'
 gem 'tzinfo-data'
 gem 'coffee-script-source', '1.8.0'
 gem 'carrierwave'
+gem 'table_print'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

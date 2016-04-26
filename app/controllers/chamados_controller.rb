@@ -33,11 +33,16 @@ class ChamadosController < ApplicationController
 	#========================================================================#
 
 	def associa_motorista
-		@chamado = Chamado.find(session[:id_chamado])
-		@chamado.update_attributes(motorista_velorio_id: params[:id])
+		@chamado = Chamado.find(params[:id_chamado])
+		if !@chamado.motorista_velorio_id
+			@chamado.update_attributes(motorista_velorio_id: params[:id])
+		elsif !@chamado.motorista_sepultamento_id
+			@chamado.update_attributes(motorista_sepultamento_id: params[:id])
+		end
 		array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
 		index_novo_status = array_status.index(@chamado.status) + 1	
 		atualizar_status(@chamado.id, array_status[index_novo_status])
+		Motorista.find(params[:id]).update_attributes(ocupado: true)
 		redirect_to chamados_path
 	end
 
@@ -47,15 +52,11 @@ class ChamadosController < ApplicationController
 		index_novo_status = array_status.index(@chamado.status) + 1			
 
 		if @chamado.status == 'Aguardando alocação de motorista' || @chamado.status == 'Alocando motorista de sepultamento'
-			session[:id_chamado] = @chamado.id
-			redirect_to lista_alocacao_motoristas_path
+			redirect_to lista_alocacao_motoristas_path(id_chamado: @chamado.id)
 		else
 			if index_novo_status < array_status.length
-				if array_status[index_novo_status] == 'Alocando motorista de sepultamento'
-					@chamado.update_attributes(motorista_velorio_id: nil)
-				end
 				atualizar_status(@chamado.id, array_status[index_novo_status])
-			end	
+			end
 			redirect_to chamados_path
 		end
 	end
@@ -66,7 +67,12 @@ class ChamadosController < ApplicationController
 
 	def atualizar_status(id, status)		
 		@chamado = Chamado.find(id)
-		@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)	
+		@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)
+		if status == 'Alocando motorista de sepultamento'
+			Motorista.find(@chamado.motorista_velorio_id).update_attributes(ocupado: false)
+		elsif status == 'Finalizado'
+			Motorista.find(@chamado.motorista_sepultamento_id).update_attributes(ocupado: false)
+		end
 	end
 
 	def atualizar_nota(id, nota)
