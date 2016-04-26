@@ -5,12 +5,12 @@ class ChamadosController < ApplicationController
 	end
 
 	def create
-		@chamado = Chamado.new(status: "Aguardando Alocação de Motoristas", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota], ncf: params[:chamado][:ncf])
+		@chamado = Chamado.new(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota], ncf: params[:chamado][:ncf])
 		if @chamado.save
       redirect_to chamados_path
     else
       render 'new'
-    end
+		end
 	end
 
 	def show
@@ -35,14 +35,14 @@ class ChamadosController < ApplicationController
 	def associa_motorista
 		@chamado = Chamado.find(session[:id_chamado])
 		@chamado.update_attributes(motorista_velorio_id: params[:id])
-		array_status = ['Aguardando Alocação de Motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
 		index_novo_status = array_status.index(@chamado.status) + 1	
 		atualizar_status(@chamado.id, array_status[index_novo_status])
 		redirect_to chamados_path
 	end
 
-	def troca_status		
-		array_status = ['Aguardando Alocação de Motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+	def troca_status
+		array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
 		@chamado = Chamado.find(params[:format])
 		index_novo_status = array_status.index(@chamado.status) + 1			
 

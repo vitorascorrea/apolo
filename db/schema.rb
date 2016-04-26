@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20160425191035) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "ncf", force: :cascade do |t|
+    t.datetime "data_velorio"
+    t.datetime "data_sepultamento"
+    t.text     "lista_itens"
+    t.string   "atendente_responsavel"
+    t.string   "nome_contratante"
+    t.string   "nome_falecido"
+    t.string   "contato_contratante"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "nome"
     t.string   "password_digest"
