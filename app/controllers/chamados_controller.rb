@@ -5,11 +5,13 @@ class ChamadosController < ApplicationController
 	end
 
 	def create
-		@chamado = Chamado.new(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes, nota: params[:chamado][:nota].to_i, ncf: params[:chamado][:ncf])
+		debugger
+		@chamado = Chamado.new(chamado_params)
 		if @chamado.save
+			@chamado.update_attributes(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes)
       redirect_to chamados_path
     else
-      render 'new'
+      	render 'new'
 		end
 	end
 
@@ -72,5 +74,9 @@ class ChamadosController < ApplicationController
 	def atualizar_nota(id, nota)
 		@chamado = Chamado.find(id)
 		@chamado.update_attributes(nota: nota)	
+	end
+
+	def chamado_params
+		params.require(:chamado).permit(:nota, :ncf, :data_velorio, :data_sepultamento)
 	end
 end

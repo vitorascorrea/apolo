@@ -4,6 +4,12 @@
   <%= f.text_field :nota %>
   <%= @chamado.errors.full_messages_for(:nota).to_sentence %><br><br>
 
+  Data do Velorio: <br>
+  <%= f.datetime_select :data_velorio %> <br> <br>
+
+	Data do Sepultamento: <br>
+  <%= f.datetime_select :data_sepultamento %> <br> <br>
+  
   PDF da NCF <br>
   <%= f.file_field :ncf, accept: 'application/pdf' %>
   <%= @chamado.errors.full_messages_for(:ncf).to_sentence %><br><br>
