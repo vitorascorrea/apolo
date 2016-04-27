@@ -1,4 +1,6 @@
 Associe um motorista para o velório da NCF <%= @chamado.nota %> <br>
+Data do velorio: <%= @chamado.data_velorio %><br>
+Data do sepultamento: <%= @chamado.data_sepultamento %><br>
 <br><br><br>
 
 <table border='1'>
@@ -6,6 +8,7 @@ Associe um motorista para o velório da NCF <%= @chamado.nota %> <br>
 		<th>RF do Motorista</th>
 		<th>Nome</th>
 		<th>Nº do Comunicador</th>
+		<th>Turno</th>
 		<th>Alocar Motorista?</th>
 	</tr>
 	<% @motoristas.each do |m| %>
@@ -13,9 +16,10 @@ Associe um motorista para o velório da NCF <%= @chamado.nota %> <br>
 		<td><%= m.id %></td>
 		<td><%= m.nome %></td>
 		<td><%= m.n_comunicador %></td>
+		<td><%= m.inicio_turno %>h até <%= m.fim_turno %>h</td>
 		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id, :id_chamado => params[:id_chamado]) %></td>
 	</tr>
-	<% end %>	
+	<% end %>
 </table>
 
 <%= link_to "Logout", logout_path, method: 'delete' %>

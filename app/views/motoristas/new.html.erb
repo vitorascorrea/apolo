@@ -1,12 +1,18 @@
 <%= form_for(@motorista) do |f| %>
-  
+
   <%= f.label :nome %>
   <%= f.text_field :nome %> <br><br>
-  
+
+  <%= f.label :inicio_turno %>
+  <%= f.select :inicio_turno, options_for_select((1..24)) %> horas<br><br>
+
+  <%= f.label :fim_turno %>
+  <%= f.select :fim_turno, options_for_select((1..24)) %> horas<br><br>
+
   <%= f.label :n_comunicador %>
   <%= f.text_field :n_comunicador %> <br><br>
-  
+
   Foto <br><br>
-  
+
   <%= f.submit "Criar usuário" %>
 <% end %>
