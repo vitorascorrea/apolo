@@ -100,6 +100,7 @@ GEM
       mail (>= 2.0.3)
       maildir (>= 0.5.0)
     mime-types (2.99)
+    mini_magick (4.5.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -202,6 +203,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mailman
+  mini_magick
   pdf-reader
   rails (= 4.2.4)
   sass-rails (~> 5.0)

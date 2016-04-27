@@ -3,14 +3,14 @@ Associe um motorista para o velório da NCF <%= @chamado.nota %> <br>
 
 <table border='1'>
 	<tr>
-		<th>RF do Motorista</th>
+		<th>Foto</th>
 		<th>Nome</th>
 		<th>Nº do Comunicador</th>
 		<th>Alocar Motorista?</th>
 	</tr>
 	<% @motoristas.each do |m| %>
 	<tr>
-		<td><%= m.id %></td>
+		<td><%= m.foto? ? image_tag(m.foto.url) : image_tag("default-user.png", size:"100x150") %></td>
 		<td><%= m.nome %></td>
 		<td><%= m.n_comunicador %></td>
 		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id, :id_chamado => params[:id_chamado]) %></td>
