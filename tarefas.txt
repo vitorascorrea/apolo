@@ -2,3 +2,4 @@
 - Adicionar botão para próximo status (tirar lista)
 - Resolver conflitos de motoristas (horarios conflitantes)
 - Administração (criar motorista, criar operador)
+- Restricoes de acesso

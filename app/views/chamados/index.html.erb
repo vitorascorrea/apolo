@@ -16,7 +16,7 @@
 		<td><%= c.data_velorio %></td>
 		<td><%= c.data_sepultamento %></td>
 		<td><%= c.tempo_prox_status.strftime('%d-%m-%Y %H:%M') %></td>
-		<td><%= c.motorista_velorio_id ? Motorista.find(c.motorista_velorio_id).nome : "Nenhum motorista alocado" %></td>
+		<td><%= c.motorista_atual %></td>
 		<td><%= c.status %></td>
 		<td><%= link_to 'Próximo Status', atualizar_status_path(c.id) %></td>		
 

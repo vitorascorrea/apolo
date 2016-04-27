@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get 'lista_alocacao_motoristas'  => 'motoristas#lista_alocacao_motoristas'
   post 'controlador_atualizacao'   => 'chamados#controlador_atualizacao'
   
-  resources :ncf
   resources :chamados
+  resources :users
   resources :sessions
   resources :motoristas
 end

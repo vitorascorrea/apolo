@@ -5,13 +5,12 @@ class ChamadosController < ApplicationController
 	end
 
 	def create
-		debugger
 		@chamado = Chamado.new(chamado_params)
 		if @chamado.save
 			@chamado.update_attributes(status: "Aguardando alocação de motorista", tempo_prox_status: Time.now.in_time_zone + 30.minutes)
       redirect_to chamados_path
     else
-      	render 'new'
+    	render 'new'
 		end
 	end
 
@@ -41,7 +40,7 @@ class ChamadosController < ApplicationController
 		elsif !@chamado.motorista_sepultamento_id
 			@chamado.update_attributes(motorista_sepultamento_id: params[:id])
 		end
-		array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		# array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
 		index_novo_status = array_status.index(@chamado.status) + 1	
 		atualizar_status(@chamado.id, array_status[index_novo_status])
 		Motorista.find(params[:id]).update_attributes(ocupado: true)
@@ -49,7 +48,7 @@ class ChamadosController < ApplicationController
 	end
 
 	def troca_status
-		array_status = ['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		# array_status = 
 		@chamado = Chamado.find(params[:format])
 		index_novo_status = array_status.index(@chamado.status) + 1			
 
@@ -84,5 +83,9 @@ class ChamadosController < ApplicationController
 
 	def chamado_params
 		params.require(:chamado).permit(:nota, :ncf, :data_velorio, :data_sepultamento)
+	end
+	
+	def array_status
+		['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
 	end
 end

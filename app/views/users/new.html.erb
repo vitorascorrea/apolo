@@ -1,0 +1,16 @@
+<%= form_for(@user) do |f| %>
+  
+  <%= f.label :nome %>
+  <%= f.text_field :nome %> <br><br>
+  
+  <%= f.label :rf %>
+  <%= f.text_field :rf %> <br><br>
+  
+  <%= f.label :password %>
+  <%= f.password_field :password %> <br><br>
+  
+  <%= f.label :password_confirmation, "Confirmação" %>
+  <%= f.password_field :password_confirmation %> <br><br>
+  
+  <%= f.submit "Criar usuário" %>
+<% end %>

@@ -1,0 +1,12 @@
+<%= form_for(@motorista) do |f| %>
+  
+  <%= f.label :nome %>
+  <%= f.text_field :nome %> <br><br>
+  
+  <%= f.label :n_comunicador %>
+  <%= f.text_field :n_comunicador %> <br><br>
+  
+  Foto <br><br>
+  
+  <%= f.submit "Criar usuário" %>
+<% end %>
