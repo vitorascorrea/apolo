@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427183521) do
+ActiveRecord::Schema.define(version: 20160427190753) do
 
   create_table "chamados", force: :cascade do |t|
     t.string   "status"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20160427183521) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "ocupado",       default: false
+    t.integer  "inicio_turno"
+    t.integer  "fim_turno"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,16 +1,22 @@
 <%= form_for(@motorista, html: { multipart: true }) do |f| %>
-  
+
   <%= f.label :nome %>
   <%= f.text_field :nome %>
   <%= @motorista.errors.full_messages_for(:nome).to_sentence %><br><br>
-  
+
+  <%= f.label :inicio_turno %>
+  <%= f.select :inicio_turno, options_for_select((1..24)) %> horas<br><br>
+
+  <%= f.label :fim_turno %>
+  <%= f.select :fim_turno, options_for_select((1..24)) %> horas<br><br>
+
   <%= f.label :n_comunicador %>
   <%= f.text_field :n_comunicador %>
   <%= @motorista.errors.full_messages_for(:n_comunicador).to_sentence %><br><br>
-  
+
   Foto <br><br>
   <%= f.file_field :foto, accept: 'image/jpeg,image/gif,image/png' %>
   <%= @motorista.errors.full_messages_for(:foto).to_sentence %><br><br>
-  
+
   <%= f.submit "Criar motorista" %>
 <% end %>
