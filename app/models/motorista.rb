@@ -1,7 +1,6 @@
 class Motorista < ActiveRecord::Base
 	has_many :chamados
 	
-	
 	VALID_FOTO_REGEX = /.+\.(jpg|jpeg|gif|png)/i
 
 	validates :nome, presence: true

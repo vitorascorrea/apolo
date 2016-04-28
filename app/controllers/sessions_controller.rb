@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-include SessionsHelper
 	
   def new
   	redirect_to chamados_path if logged_in?  	

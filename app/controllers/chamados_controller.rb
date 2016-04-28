@@ -1,4 +1,5 @@
 class ChamadosController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :index, :update, :associa_motorista, :troca_status]
 	
 	def new
 		@chamado = Chamado.new
@@ -66,26 +67,26 @@ class ChamadosController < ApplicationController
 
 	private
 
-	def atualizar_status(id, status)		
-		@chamado = Chamado.find(id)
-		@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)
-		if status == 'Alocando motorista de sepultamento'
-			Motorista.find(@chamado.motorista_velorio_id).update_attributes(ocupado: false)
-		elsif status == 'Finalizado'
-			Motorista.find(@chamado.motorista_sepultamento_id).update_attributes(ocupado: false)
+		def atualizar_status(id, status)		
+			@chamado = Chamado.find(id)
+			@chamado.update_attributes(status: status, tempo_prox_status: Time.now.in_time_zone + 30.minutes)
+			if status == 'Alocando motorista de sepultamento'
+				Motorista.find(@chamado.motorista_velorio_id).update_attributes(ocupado: false)
+			elsif status == 'Finalizado'
+				Motorista.find(@chamado.motorista_sepultamento_id).update_attributes(ocupado: false)
+			end
 		end
-	end
-
-	def atualizar_nota(id, nota)
-		@chamado = Chamado.find(id)
-		@chamado.update_attributes(nota: nota)	
-	end
-
-	def chamado_params
-		params.require(:chamado).permit(:nota, :ncf, :data_velorio, :data_sepultamento)
-	end
 	
-	def array_status
-		['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
-	end
+		def atualizar_nota(id, nota)
+			@chamado = Chamado.find(id)
+			@chamado.update_attributes(nota: nota)	
+		end
+	
+		def chamado_params
+			params.require(:chamado).permit(:nota, :ncf, :data_velorio, :data_sepultamento)
+		end
+		
+		def array_status
+			['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+		end
 end

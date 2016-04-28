@@ -1,4 +1,5 @@
 class MotoristasController < ApplicationController
+  before_action :logged_in_user
 	
 	def lista_alocacao_motoristas
 		@chamado = Chamado.find(params[:id_chamado])
