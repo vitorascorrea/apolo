@@ -8,20 +8,10 @@
 	Tempo estimado: <span id="countdown" class="timer">Calculando...</span>
 	<br>
 	<br>
-	Motorista alocado: <%= @motorista.nome unless @motorista.nil? %><br>
-	Número do Comunicador: <%= @motorista.n_comunicador unless @motorista.nil? %>
+	Motorista alocado: <%= @motorista ? @motorista.nome : "Nenhum motorista alocado" %><br>
+	<%= @motorista ? image_tag(@motorista.foto.url) : image_tag("default-user.png", size:"100x150") %>
+	Número do Comunicador: <%= @motorista ? @motorista.n_comunicador : "Nenhum motorista alocado" %>
 <% elsif @chamado.status == "Finalizado" && @chamado.nota.nil? %>	
-	<%= form_for @chamado do |f| %>
-		<fieldset class="rating">
-			<%= f.radio_button :nota, 5 %><label for="chamado_nota_5" title="Muito bom">5 stars</label>
-			<%= f.radio_button :nota, 4 %><label for="chamado_nota_4" title="Bom">4 stars</label>
-			<%= f.radio_button :nota, 3 %><label for="chamado_nota_3" title="Satisfatório">3 stars</label>
-			<%= f.radio_button :nota, 2 %><label for="chamado_nota_2" title="Pouco Satisfatório">2 stars</label>
-			<%= f.radio_button :nota, 1 %><label for="chamado_nota_5" title="Nada Satisfatório">1 star</label>
-		</fieldset>
-		<%= f.submit "Enviar" %>
-	<% end %>
-<% elsif @chamado.status == "Finalizado" && !@chamado.nota.nil? %>
 	Obrigado por votar!
 <% end %>
 </div>
