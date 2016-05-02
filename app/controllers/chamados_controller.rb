@@ -30,25 +30,20 @@ class ChamadosController < ApplicationController
 		@chamados = Chamado.all
 	end
 
-	def update
-		@chamado = Chamado.find(params[:id])
-		atualizar_nota(params[:id], params[:chamado][:nota])
-		redirect_to root_url
-	end
-
 	#========================================================================#
 
 	def associa_motorista
-		@chamado = Chamado.find(params[:id_chamado])
-		if !@chamado.motorista_velorio_id
-			@chamado.update_attributes(motorista_velorio_id: params[:id])
-		elsif !@chamado.motorista_sepultamento_id
-			@chamado.update_attributes(motorista_sepultamento_id: params[:id])
-		end
-		index_novo_status = array_status.index(@chamado.status) + 1
-		atualizar_status(@chamado.id, array_status[index_novo_status])
-		Motorista.find(params[:id]).update_attributes(ocupado: true)
-		redirect_to chamados_path
+		@bla = proximos_status('Aguardando alocação de motorista para o sepultamento')
+		# @chamado = Chamado.find(params[:id_chamado])
+		# if !@chamado.motorista_velorio_id
+		# 	@chamado.update_attributes(motorista_velorio_id: params[:id])
+		# elsif !@chamado.motorista_sepultamento_id
+		# 	@chamado.update_attributes(motorista_sepultamento_id: params[:id])
+		# end
+		# index_novo_status = array_status.index(@chamado.status) + 1
+		# atualizar_status(@chamado.id, array_status[index_novo_status])
+		# Motorista.find(params[:id]).update_attributes(ocupado: true)
+		# redirect_to chamados_path
 	end
 
 	def troca_status
@@ -78,16 +73,34 @@ class ChamadosController < ApplicationController
 			end
 		end
 
-		def atualizar_nota(id, nota)
-			@chamado = Chamado.find(id)
-			@chamado.update_attributes(nota: nota)
-		end
-
 		def chamado_params
 			params.require(:chamado).permit(:nota, :ncf, :data_velorio, :data_sepultamento)
 		end
 
 		def array_status
-			['Aguardando alocação de motorista', 'À caminho do falecido', 'À caminho do local de velório', 'Alocando motorista de sepultamento', 'À caminho do local de sepultamento', 'Finalizado']
+			['Aguardando alocação de motorista', 'Buscar material', 'Buscar falecido', 'A caminho do local de sepultamento', 'A caminho do local de velório', 'Aguardando alocação de motorista para o sepultamento', 'Finalizado']
+		end
+		
+		def matriz_de_adjacencia
+			[
+					[0,1,1,0,0,0,0], # Aguardando alocação de motorista
+					[0,0,1,0,0,0,0], # Buscar material
+					[0,0,0,1,1,0,0], # Buscar falecido
+					[0,0,0,0,0,0,1], # A caminho do local de sepultamento
+					[0,0,0,0,0,1,1], # A caminho do local de velório
+					[0,0,0,1,0,0,0], # Aguardando alocação de motorista para o sepultamento
+					[0,0,0,0,0,0,0]  # Finalizado
+			]
+		end
+		
+		def proximos_status(status)
+			indice = array_status.index(status)
+			array = []
+			matriz_de_adjacencia[indice].each_with_index do |val,index| 
+				if val == 1
+					array << array_status[index]
+				end
+			end
+			return array
 		end
 end
