@@ -3,7 +3,7 @@ class MotoristasController < ApplicationController
 
 	def lista_alocacao_motoristas
 		@chamado = Chamado.find(params[:id_chamado])
-		if @chamado.motorista_sepultamento_id == nil && @chamado.motorista_velorio_id == nil
+		if @chamado.motorista_velorio_id == nil
 			horario_velorio = @chamado.data_velorio.hour
 			@motoristas = seleciona_motoristas_intervalo(horario_velorio)
 		else

@@ -10,16 +10,16 @@ class Chamado < ActiveRecord::Base
 	validate  :ncf_size
 
 	mount_uploader :ncf, PdfUploader
-	
+
 	def motorista_atual
-		if self.status == 'Aguardando alocação de motorista' or self.status == 'Alocando motorista de sepultamento' or self.status == 'Finalizado'
-			return "Nenhum motorista alocado"
-		elsif self.status == 'À caminho do falecido' or self.status == 'À caminho do local de velório'
-			return Motorista.find(self.motorista_velorio_id).nome
-		else
-			return Motorista.find(self.motorista_sepultamento_id).nome
-		end
-	end
+    if self.motorista_velorio_id.nil? && self.motorista_sepultamento_id.nil?
+      'Nenhum motorista associado'
+    elsif !self.motorista_velorio_id.nil? && self.motorista_sepultamento_id.nil?
+      Motorista.find(self.motorista_velorio_id).nome
+    else
+      Motorista.find(self.motorista_sepultamento_id).nome
+    end
+  end
 
 	private
 

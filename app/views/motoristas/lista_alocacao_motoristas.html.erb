@@ -4,7 +4,7 @@ Data do sepultamento: <%= @chamado.data_sepultamento %><br>
 <br><br><br>
 
 <table border='1'>
-	<tr>		
+	<tr>
 		<th>Foto</th>
 		<th>Nome</th>
 		<th>Nº do Comunicador</th>
@@ -17,7 +17,7 @@ Data do sepultamento: <%= @chamado.data_sepultamento %><br>
 		<td><%= m.nome %></td>
 		<td><%= m.n_comunicador %></td>
 		<td><%= m.inicio_turno %>h até <%= m.fim_turno %>h</td>
-		<td><%= link_to "Alocar", associa_motorista_path(:id => m.id, :id_chamado => params[:id_chamado]) %></td>
+		<td><%= link_to "Alocar", associa_motorista_path(:id_motorista => m.id, :id_chamado => params[:id_chamado]) %></td>
 	</tr>
 	<% end %>
 </table>

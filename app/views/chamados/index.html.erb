@@ -1,13 +1,14 @@
 <table border='1'>
 	<tr>
 		<th>Nº da NCF</th>
-		<th>NCF</th>		
-		<th>Data Velorio</th>		
-		<th>Data Sepultamento</th>		
+		<th>NCF</th>
+		<th>Data Velorio</th>
+		<th>Data Sepultamento</th>
 		<th>Horário para a próxima mudança de Status</th>
 		<th>Motorista responsável</th>
-		<th>Status Atual</th>
-		<th>Alterar Status</th>
+		<th>Estado Atual</th>
+		<th>Próximo Estado</th>
+		<th>Executar Ação</th>
 	</tr>
 	<% @chamados.each do |c| %>
 	<tr>
@@ -18,10 +19,14 @@
 		<td><%= c.tempo_prox_status.strftime('%d-%m-%Y %H:%M') %></td>
 		<td><%= c.motorista_atual %></td>
 		<td><%= c.status %></td>
-		<td><%= link_to 'Próximo Status', atualizar_status_path(c.id) %></td>		
+		<%= form_tag altera_status_path(id_chamado: c.id) do %>
+					<%= hidden_field_tag 'status_atual', c.status %>
+  		<td><%= select_tag 'prox_status', options_for_select(proximos_status(c.status).collect) %></td>
+			<td><%= submit_tag 'Ir para proximo estado' %></td>
+		<% end %>
 
 	</tr>
-	<% end %>	
+	<% end %>
 </table>
 
 <%= link_to "Criar novo chamado", new_chamado_path %>
